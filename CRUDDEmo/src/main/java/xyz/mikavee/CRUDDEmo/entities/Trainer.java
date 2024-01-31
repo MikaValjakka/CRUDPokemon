@@ -33,6 +33,8 @@ public class Trainer {
 
     private List<Pokemon> pokemons = new ArrayList<>();
 
+    private List<Role> roles = new ArrayList<>();
+
     public Trainer(String firstName, String lastName,String userName, int age, String password) {
         this.firstName = firstName;
         this.lastName = lastName;

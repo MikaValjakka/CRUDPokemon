@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,6 +21,9 @@ public class SecurityConfig {
 
     private final TrainerService trainerService;
     private final PasswordEncoder passwordEncoder;
+    private final MongoUserDetailService userDetailService;
+
+
 
 
     @Bean
@@ -29,10 +33,16 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())// Disable CSRF (Cross-Site Request Forgery) protection
                 .authorizeHttpRequests(req -> {  // Configure authorization rules for HTTP requests
                     req.requestMatchers(HttpMethod.GET, "/api/pokemons").permitAll();
+                    req.requestMatchers(HttpMethod.POST,"/api/pokemins").hasRole("ADMIN");
+                    req.requestMatchers("/").permitAll();
                     req.requestMatchers( "/api/pokemons").authenticated();
                     req.requestMatchers("/login").permitAll();
+                    req.requestMatchers("/api/trainers").hasRole("ADMIN");
 
-                });
+                    req.anyRequest().authenticated();
+
+                })
+                .formLogin(Customizer.withDefaults());
 
 
 

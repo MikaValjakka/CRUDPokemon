@@ -21,7 +21,7 @@ public class MainPageController {
 
     @GetMapping
     public ResponseEntity<String> getFrontPageMessage() {
-        String message = "Welcome to the main page!";
+        String message = "Welcome to the main page! This should be open to all.";
         return ResponseEntity.ok(message);
     }
 

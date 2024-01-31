@@ -36,6 +36,8 @@ public class TrainerService {
 
         String hashedPassword = passwordEncoder.encode(trainer.getPassword());
         trainer.setPassword(hashedPassword);
+        // Set roles for the trainer
+        trainer.setRoles(trainer.getRoles());
 
 
         // save the Trainer
