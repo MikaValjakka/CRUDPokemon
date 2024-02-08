@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CRUDDEmo/CRUDDEmo.iml" filepath="$PROJECT_DIR$/CRUDDEmo/CRUDDEmo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/CRUDDEmo.iml" filepath="$PROJECT_DIR$/server/CRUDDEmo.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/CRUDDEmo (1).iml" filepath="$PROJECT_DIR$/.idea/CRUDDEmo (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/CRUDDEmo/server.iml" filepath="$PROJECT_DIR$/CRUDDEmo/server.iml" />
     </modules>
   </component>
 </project>

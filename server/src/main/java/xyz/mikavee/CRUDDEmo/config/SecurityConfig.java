@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())// Disable CSRF (Cross-Site Request Forgery) protection
                 .authorizeHttpRequests(req -> {  // Configure authorization rules for HTTP requests
                     req.requestMatchers(HttpMethod.GET, "/api/pokemons").permitAll();
-                    req.requestMatchers(HttpMethod.POST,"/api/pokemins").hasRole("ADMIN");
+                    req.requestMatchers(HttpMethod.POST,"/api/pokemons").hasRole("ADMIN");
                     req.requestMatchers("/").permitAll();
                     req.requestMatchers( "/api/pokemons").authenticated();
                     req.requestMatchers("/login").permitAll();
