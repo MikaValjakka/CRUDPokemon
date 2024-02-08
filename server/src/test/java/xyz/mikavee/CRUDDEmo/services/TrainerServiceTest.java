@@ -13,7 +13,7 @@ import xyz.mikavee.CRUDDEmo.repositories.TrainerRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 class TrainerServiceTest {
@@ -58,6 +58,48 @@ class TrainerServiceTest {
 
         // Verifying that the response body contains the same Trainer object that was created.
         assertEquals(trainerToCreate, responseEntity.getBody());
+    }
+
+    @Test
+    void testDeleteTrainer_SuccessfulDeletion() {
+        // Arrange
+        String trainerId = "someId";
+
+        // Mock the existence of the trainer
+        when(trainerRepository.existsById(trainerId)).thenReturn(true);
+        // Mock the deletion of the trainer
+        doNothing().when(trainerRepository).deleteById(trainerId);
+
+        // Act
+        ResponseEntity<String> responseEntity = trainerService.deleteTrainer(trainerId);
+
+        // Assert
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals("Trainer with ID " + trainerId + " Deleted", responseEntity.getBody());
+
+        // Verify that repository methods were called appropriately
+        verify(trainerRepository, times(1)).existsById(trainerId);
+        verify(trainerRepository, times(1)).deleteById(trainerId);
+    }
+
+    @Test
+    void testDeleteTrainer_TrainerNotFound() {
+        // Arrange
+        String trainerId = "someId";
+
+        // Mock the non-existence of the trainer
+        when(trainerRepository.existsById(trainerId)).thenReturn(false);
+
+        // Act
+        ResponseEntity<String> responseEntity = trainerService.deleteTrainer(trainerId);
+
+        // Assert
+        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+        assertEquals("Trainer with ID " + trainerId + " not found", responseEntity.getBody());
+
+        // Verify that repository methods were called appropriately
+        verify(trainerRepository, times(1)).existsById(trainerId);
+        verify(trainerRepository, never()).deleteById(trainerId);
     }
 
 

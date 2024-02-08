@@ -43,4 +43,10 @@ public class TrainerController {
         return trainerService.addPokemonToTrainer(trainerId, pokemonId);
     }
 
+    @DeleteMapping("/{trainerId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<String> deleteTrainer(@PathVariable String trainerId) {
+        return trainerService.deleteTrainer(trainerId);
+    }
+
 }

@@ -111,6 +111,20 @@ public class TrainerService {
     }
 
 
-
-
+    public ResponseEntity<String> deleteTrainer(String trainerId) {
+        // Assuming trainerRepository is the repository for trainers
+        if (trainerRepository.existsById(trainerId)) {
+            // Delete the trainer from the repository
+            trainerRepository.deleteById(trainerId);
+            // Return a response indicating successful deletion
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body("Trainer with ID " + trainerId + " Deleted");
+        } else {
+            // Return a response indicating that the trainer with the given ID does not exist
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Trainer with ID " + trainerId + " not found");
+        }
+    }
 }
